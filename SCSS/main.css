@@ -10907,6 +10907,38 @@ main #listeProduit .contenant-card .card-description a:hover {
           transform: scale(1.1);
 }
 
+#detailProduit #picture {
+  width: 100%;
+  height: 100%;
+}
+
+#detailProduit h3 {
+  font-family: 'East';
+  font-size: 50px;
+  margin-bottom: 20px;
+}
+
+#detailProduit p {
+  font-family: 'OpenSans';
+}
+
+#detailProduit span {
+  font-family: 'OpenSans-Bold';
+  font-size: 20px;
+  opacity: 0.9;
+}
+
+#detailProduit #optionAction {
+  position: relative;
+  padding: 0px 15px;
+}
+
+#detailProduit #optionAction #ajoutPanier {
+  position: absolute;
+  right: 10%;
+  bottom: 10%;
+}
+
 /* FOOTER */
 footer {
   background-color: #f8f9f9;

@@ -14,7 +14,7 @@ getTeddies = () => {
         } else {
         }
       };
-      request.open("GET", "http://localhost:3000/api/teddies/" + idOurs);
+      request.open("GET", "http://localhost:3000/api/teddies/" + idTeddies);
       request.send();
     });
   };
@@ -36,15 +36,15 @@ async function teddies() {
     teddies.forEach((teddie) => {
 
         // Création de la structure html pour stocker les teddies
-        let myContenant = document.createElement("div");
-        let myDiv = document.createElement("div");
-        let myPicture = document.createElement("img");
-        let myDesc = document.createElement("div");
-        let myName = document.createElement("h2");
-        let myPrice = document.createElement("p");
-        let myId = document.createElement("a");
+        const myContenant = document.createElement("div");
+        const myDiv = document.createElement("div");
+        const myPicture = document.createElement("img");
+        const myDesc = document.createElement("div");
+        const myName = document.createElement("h2");
+        const myPrice = document.createElement("p");
+        const myId = document.createElement("a");
 
-        // Ajout des class aux balises index HTML
+        // Ajout des class aux balises index html
         myContenant.setAttribute("class", "contenant-card col-lg-4 col-md-6 mb-5 mt-5");
         myDiv.setAttribute("class", "card");
         myPicture.setAttribute("src", teddie.imageUrl);
@@ -65,7 +65,7 @@ async function teddies() {
         myDesc.appendChild(myPrice);
         myDesc.appendChild(myId);
         
-        // Contenu des balises index HTML
+        // Contenu des balises index html
         myName.textContent = teddie.name;
         myPrice.textContent = teddie.price / 100 + " euros";
         myId.textContent = "En savoir plus";
@@ -75,9 +75,21 @@ async function teddies() {
 
 /////////////////////////////////////////////////////////// PRODUIT.HTML ///////////////////////////////////////////////////////////////////
 
-let idOurs = '';
-async function detailTeddie() {
+// Déclaration d'une variable ajouter à la requête GET
+let idTeddies = "";
 
-     = location.search.substring(4);
-    console.log(myId)
-}
+// Déclaration d'une fonction d'implémentation du produit qui sera séléctionner avec son _id
+async function detailTeddies() {
+
+    // Ciblage de l'_id dans l'URL pour le récupérer dans l'API
+    idTeddies = location.search.substring(4);
+    const detailTeddies = await getTeddies();
+    console.log(detailTeddies)
+   
+    // Création de la structure pour stocker le produit
+    document.getElementById("picture").setAttribute("src", detailTeddies.imageUrl);
+    document.getElementById("informationTitle").innerHTML = detailTeddies.name; 
+    document.getElementById("informationDescription").innerHTML = detailTeddies.description;
+    document.getElementById("informationPrice").innerHTML = detailTeddies.price / 100 + " €";
+
+} 

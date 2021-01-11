@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Orinours vos peluches fait main</title>
+  <title>Votre produit Orinours</title>
   <meta name="description" content="Vos meilleurs peluches d'ours ! Fabrication française, bénéficiez de la meilleure qualité fait main.">
   <link rel="stylesheet" href="SCSS/main.css" />
 </head>
@@ -32,12 +32,36 @@
           </ul>
         </div>
       </div>
-      
     </nav>
   </header>
 
   <main>
-    <section id="detailTeddie">
+    <div id="hero" class="container-fluid">
+      <h1><em>Votre Ours fait main !</em></h1>
+    </div>
+    <section id="detailProduit">
+      <div class="container">
+        <div class="row mt-4">
+          <div id="imageProduit" class="col-lg-6">
+            <img id="picture">
+          </div> 
+          <div id="information" class="col-lg-6">
+            <h3 id="informationTitle"></h3>
+            <p id="informationDescription"></p>
+            <span id="informationPrice"></span>
+            <div class="row mt-5" id="optionAction">
+              <div id="informationOption">
+                <p>Je choisis ma couleur :</p>
+                <select name="option" id="choix_option" required aria-invalid="false">
+                  <option disabled value="" selected>Choix couleur</option>
+                </select>
+              </div>
+              <button id="ajoutPanier" class="btn btn-success">Ajouter au panier</button>
+            </div>
+            
+          </div>
+        </div>
+      </div>
     </section>
   </main>
 
@@ -53,6 +77,7 @@
 
   <!-- SCRIPT APPLICATION -->
   <script src="./script.js"></script>
+  <script>detailTeddies();</script>
 
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
