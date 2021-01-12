@@ -10933,10 +10933,30 @@ main #listeProduit .contenant-card .card-description a:hover {
   padding: 0px 15px;
 }
 
+#detailProduit #optionAction #informationOption p {
+  font-family: "OpenSans-Bold";
+}
+
 #detailProduit #optionAction #ajoutPanier {
   position: absolute;
-  right: 10%;
-  bottom: 10%;
+  right: 2%;
+  bottom: 2%;
+}
+
+#panier table thead tr {
+  border: solid 2px black;
+}
+
+#panier table thead tr td {
+  border: solid 2px black;
+}
+
+#panier table tbody tr {
+  border: solid 2px black;
+}
+
+#panier table tbody tr td {
+  border: solid 2px black;
 }
 
 /* FOOTER */

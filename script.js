@@ -45,7 +45,7 @@ async function teddies() {
         const myId = document.createElement("a");
 
         // Ajout des class aux balises index html
-        myContenant.setAttribute("class", "contenant-card col-lg-4 col-md-6 mb-5 mt-5");
+        myContenant.setAttribute("class", "contenant-card col-lg-4 col-md-6 mt-5");
         myDiv.setAttribute("class", "card");
         myPicture.setAttribute("src", teddie.imageUrl);
         myPicture.setAttribute("alt", "Photo de l'ours en peluche");
@@ -75,13 +75,13 @@ async function teddies() {
 
 /////////////////////////////////////////////////////////// PRODUIT.HTML ///////////////////////////////////////////////////////////////////
 
-// Déclaration d'une variable ajouter à la requête GET
+// Déclaration d'une variable ajouter à la requête GET pour ajout de l'id du produit
 let idTeddies = "";
 
-// Déclaration d'une fonction d'implémentation du produit qui sera séléctionner avec son _id
+// Déclaration d'une fonction d'implémentation du produit qui sera séléctionner avec son id
 async function detailTeddies() {
 
-    // Ciblage de l'_id dans l'URL pour le récupérer dans l'API
+    // Ciblage de l'id dans l'URL saute 4 caractères pour le récupérer dans l'API
     idTeddies = location.search.substring(4);
     const detailTeddies = await getTeddies();
     console.log(detailTeddies)
@@ -92,4 +92,62 @@ async function detailTeddies() {
     document.getElementById("informationDescription").innerHTML = detailTeddies.description;
     document.getElementById("informationPrice").innerHTML = detailTeddies.price / 100 + " €";
 
-} 
+    // Récupération des colors pour les boucler sur chaque teddies 
+    detailTeddies.colors.forEach((teddie) => {
+        let choixOption = document.createElement("option");
+        // Mettre les colors dans "choix_option"
+        let selectColor = document.getElementById("choix_option");
+        selectColor.appendChild(choixOption).innerHTML = teddie;
+        
+        let valueSelectcolor = selectColor.options[selectColor.selectedIndex].value;
+        console.log(valueSelectcolor)
+    });
+    
+    // Voir si il y a des produits dans le panier, si oui le parser sinon créer un tableau vide
+    function initPanier() {
+        let panier = localStorage.getItem("panier");
+        if(panier != null) {
+            return JSON.parse(panier); 
+        }else {
+            return[];
+        }
+    }
+
+    // On récupère l'id de la page produit
+    let idProduit = detailTeddies;
+    console.log(idProduit)
+    
+    // Sauvegarde du panier
+    function savePanier(panier) {
+        localStorage.setItem("panier", JSON.stringify(panier));
+    }
+
+    // Lié une variable au bouton pour l'évènement
+    let boutonPanier = document.getElementById('ajoutPanier');
+
+    // Avec l'évènement click on envoie l'id dans le localStorage + une alerte est créée
+    boutonPanier.addEventListener('click', function () {
+
+        // Envoie de l'id dans le storage via le panier
+        let panier = initPanier();
+        panier.push(idProduit);
+        savePanier(panier);
+
+        // Envoie de l'alert
+        alert('Votre teddie à bien été ajouté au panier');
+    });
+}
+
+
+/////////////////////////////////////////////////////////// PANIER.HTML ///////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
+

@@ -66,11 +66,12 @@ header {
   } 
 }
 
+/////////////////////////////////////////////////// INDEX.HTML ////////////////////////////////////////////////////////
+
 /* CONTENU */
 
 main {
 
-////////////////////////////////////////// INDEX.HTML ////////////////////////////////////////////////////////
   #hero {
     background-color: #f2e9f1;
 
@@ -128,7 +129,7 @@ main {
 }
 
 
-////////////////////////////////////////// PRODUIT.HTML ////////////////////////////////////////////////////////
+//////////////////////////////////////////////////// PRODUIT.HTML ////////////////////////////////////////////////////////
 
 #detailProduit {
       
@@ -157,12 +158,49 @@ main {
     position: relative;
     padding: 0px 15px;
 
+    #informationOption {
+
+      p {
+        font-family: "OpenSans-Bold";
+      }
+    }
+
     #ajoutPanier {
       position: absolute;
-      right: 10%;
-      bottom: 10%;
+      right: 2%;
+      bottom: 2%;
     }
   }  
+}
+
+
+//////////////////////////////////////////////////// PANIER.HTML ////////////////////////////////////////////////////////
+
+#panier {
+
+  table {
+
+    thead{
+
+      tr {
+        border: solid 2px black;
+
+        td {
+          border: solid 2px black;
+        }
+      }
+    }
+    tbody {
+
+      tr {
+        border: solid 2px black;
+
+        td {
+          border: solid 2px black;
+        }
+      }
+    }
+  }
 }
 
 

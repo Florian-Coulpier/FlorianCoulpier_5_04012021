@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Votr Panier</title>
+  <title>Votre Panier</title>
   <meta name="description" content="Consulter votre panier de vos meilleurs Ours fait main.">
-  <link rel="stylesheet" href="SCSS/style.css" />
+  <link rel="stylesheet" href="SCSS/main.css" />
 </head>
 <body>
   <header>
@@ -41,10 +41,64 @@
         <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
         </svg></em>
       </h1>
-      <div id="elementsPanier">
-
-      </div>
     </div>
+    <section id="panier" class="container mb-3">
+      <table>
+        <thead>
+          <tr>
+            <td>Article</td>
+            <td>Nom</td>
+            <td>Prix</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="formulaire container mt-5">
+      <h2>Je passe ma commande</h2>
+      <div class="cadre">
+        <form method="post" name="formContact" id="form_1">
+          <div class="form-group">
+            <label for="nom">Nom de famille</label>
+            <input type="text" id="nom" name="nom" class="form-control" required autofocus placeholder="Votre nom de famille"/>
+          </div>
+          <div class="form-group">
+            <label for="prenom">Prénom</label>
+            <input type="text" id="prenom" name="prenom" class="form-control" required placeholder="Votre prénom"/>
+          </div>
+          <div class="form-group">
+            <label for="email">Adresse email</label>
+            <input type="email" id="email" name="email" class="form-control" required placeholder="Entrez votre adresse mail"/>
+          </div>
+          <div class="form-group">
+            <label for="adresse">Adresse postale et de facturation</label>
+            <input type="text" id="adresse" name="adresse" class="form-control" required placeholder="Ex: 48, Rue Garibaldi"/>
+          </div>
+          <div class="form-group">
+            <label for="ville">Ville</label>
+            <input type="text" id="ville" name="ville" class="form-control" required placeholder="Ex: Lyon"/>
+          </div>
+          <div class="form-group">
+            <label>Choix du moyen de paiement</label>
+            <div id="carte">
+              <input type="radio" class="paiement" name="identifieur" value="Visa" checked/><i class="fab fa-cc-visa fa-2x"></i>
+              <input type="radio" class="paiement" name="identifieur" value="Mastercard"/><i class="fab fa-cc-mastercard fa-2x"></i>
+              <input type="radio" class="paiement" name="identifieur" value="Paypal"/><i class="fab fa-cc-paypal fa-2x"></i>
+            </div>
+          </div>
+          <button id="commander" type="submit" name="commander">
+            Commander
+          </button>
+        </form>
+      </div>
+    </section>
   </main>
   
   <footer>
@@ -56,6 +110,9 @@
       </ul>
     </div>
   </footer>
+
+  <!-- SCRIPT APPLICATION -->
+  <script src="./script.js"></script>
 
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
