@@ -1,4 +1,3 @@
-/* IMPORT BOOTSTRAP */
 /*!
  * Bootstrap v4.5.3 (https://getbootstrap.com/)
  * Copyright 2011-2020 The Bootstrap Authors
@@ -10803,7 +10802,6 @@ a.text-dark:hover, a.text-dark:focus {
   }
 }
 
-/* IMPORT POLICES H* & TEXTE */
 @font-face {
   font-family: "OpenSans";
   src: url("../Font/Open_Sans/OpenSans-Regular.ttf");
@@ -10943,20 +10941,13 @@ main #listeProduit .contenant-card .card-description a:hover {
   bottom: 2%;
 }
 
-#panier table thead tr {
-  border: solid 2px black;
+#panier div img {
+  width: 100%;
+  height: 100%;
 }
 
-#panier table thead tr td {
-  border: solid 2px black;
-}
-
-#panier table tbody tr {
-  border: solid 2px black;
-}
-
-#panier table tbody tr td {
-  border: solid 2px black;
+#panier div .fas {
+  font-size: 50px;
 }
 
 /* FOOTER */
