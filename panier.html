@@ -6,6 +6,7 @@
   <title>Votre Panier</title>
   <meta name="description" content="Consulter votre panier de vos meilleurs Ours fait main.">
   <link rel="stylesheet" href="SCSS/main.css" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
 </head>
 <body>
   <header>
@@ -44,44 +45,40 @@
     </div>
 
     <section id="panier" class="container mb-5 mt-5">
-      
+      <div id="panierVide" class="d-flex justify-content-center mt-4 mb-3">
+        <h2>Votre panier est vide</h2>
+      </div>
     </section>
 
-    <section class="formulaire container mt-5">
-      <h2>Je passe ma commande</h2>
-      <div class="cadre">
-        <form method="post" name="formContact" id="form_1">
+    <section id="formulaire" class="container">
+      <div id="formulaire_title" class="mb-5">
+        <h2>Je passe ma commande</h2>
+      </div>
+      <div id="formulaire_infos">
+        <form method="post" name="formContact">
           <div class="form-group">
-            <label for="nom">Nom de famille</label>
-            <input type="text" id="nom" name="nom" class="form-control" required autofocus placeholder="Votre nom de famille"/>
+            <label for="nom"><em>Nom de famille</em></label>
+            <input id="formNom" type="text" class="form-control" required placeholder="Votre nom de famille"/>
           </div>
           <div class="form-group">
-            <label for="prenom">Prénom</label>
-            <input type="text" id="prenom" name="prenom" class="form-control" required placeholder="Votre prénom"/>
+            <label for="prenom"><em>Prénom</em></label>
+            <input id="formPrenom" type="text" class="form-control" required placeholder="Votre prénom"/>
           </div>
           <div class="form-group">
-            <label for="email">Adresse email</label>
-            <input type="email" id="email" name="email" class="form-control" required placeholder="Entrez votre adresse mail"/>
+            <label for="email"><em>Adresse email</em></label>
+            <input id="formEmail" type="email" class="form-control" required placeholder="Entrez votre adresse mail"/>
           </div>
           <div class="form-group">
-            <label for="adresse">Adresse postale et de facturation</label>
-            <input type="text" id="adresse" name="adresse" class="form-control" required placeholder="Ex: 48, Rue Garibaldi"/>
+            <label for="adresse"><em>Adresse postale et de facturation</em></label>
+            <input id="formAdresse" type="text" class="form-control" required placeholder="Ex: 48, Rue Garibaldi"/>
           </div>
           <div class="form-group">
-            <label for="ville">Ville</label>
-            <input type="text" id="ville" name="ville" class="form-control" required placeholder="Ex: Lyon"/>
+            <label for="ville"><em>Ville</em></label>
+            <input id="formVille" type="text" class="form-control" required placeholder="Ex: Lyon"/>
           </div>
-          <div class="form-group">
-            <label>Choix du moyen de paiement</label>
-            <div id="carte">
-              <input type="radio" class="paiement" name="identifieur" value="Visa" checked/><i class="fab fa-cc-visa fa-2x"></i>
-              <input type="radio" class="paiement" name="identifieur" value="Mastercard"/><i class="fab fa-cc-mastercard fa-2x"></i>
-              <input type="radio" class="paiement" name="identifieur" value="Paypal"/><i class="fab fa-cc-paypal fa-2x"></i>
-            </div>
+          <div class="text-center mt-5">
+            <button type="submit" class="btn btn-success col-md-3">Commander</button>
           </div>
-          <button id="commander" type="submit" name="commander">
-            Commander
-          </button>
         </form>
       </div>
     </section>
@@ -98,8 +95,8 @@
   </footer>
 
   <!-- SCRIPT APPLICATION -->
-  <script src="./script.js"></script>
-  <script defer src="https://use.fontawesome.com/releases/v5.15.1/js/all.js" integrity="sha384-9/D4ECZvKMVEJ9Bhr3ZnUAF+Ahlagp1cyPC7h5yDlZdXs4DQ/vRftzfd+2uFUuqS" crossorigin="anonymous"></script>
+  <script src="./JS/panier.js"></script>
+  <script>tableauPanier();</script>
 
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>

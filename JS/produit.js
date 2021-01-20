@@ -1,3 +1,25 @@
+///////////////////////////////////////////////////// REQUETE GET VERS L'API ///////////////////////////////////////////////////////////////
+
+getTeddies = () => {
+  return new Promise((resolve) => {
+    let request = new XMLHttpRequest();
+    request.onreadystatechange = function () {
+      if (
+        this.readyState == XMLHttpRequest.DONE &&
+        this.status >= 200 &&
+        this.status < 400
+      ) {
+        resolve(JSON.parse(this.responseText));
+        console.log(this.responseText);
+      } else {
+      }
+    };
+    request.open("GET", "http://localhost:3000/api/teddies/" + idTeddies);
+    request.send();
+  });
+};
+
+
 /////////////////////////////////////////////////////////// PRODUIT.HTML ///////////////////////////////////////////////////////////////////
 
 // Déclaration d'une variable ajouter à la requête GET pour ajout de l'id du produit
@@ -6,57 +28,56 @@ let idTeddies = "";
 // Déclaration d'une fonction d'implémentation du produit qui sera séléctionner avec son id
 async function detailTeddies() {
 
-    // Ciblage de l'id dans l'URL saute 4 caractères pour le récupérer dans l'API
-    idTeddies = location.search.substring(4);
-    const detailTeddies = await getTeddies();
-    console.log(detailTeddies)
-   
-    // Création de la structure pour stocker le produit
-    document.getElementById("picture").setAttribute("src", detailTeddies.imageUrl);
-    document.getElementById("informationTitle").innerHTML = detailTeddies.name; 
-    document.getElementById("informationDescription").innerHTML = detailTeddies.description;
-    document.getElementById("informationPrice").innerHTML = detailTeddies.price / 100 + " €";
+  // Ciblage de l'id dans l'URL saute 4 caractères pour le récupérer dans l'API
+  idTeddies = location.search.substring(4);
+  const detailTeddies = await getTeddies();
+  console.log(detailTeddies)
+  
+  // Création de la structure pour stocker le produit
+  document.getElementById("picture").setAttribute("src", detailTeddies.imageUrl);
+  document.getElementById("informationTitle").innerHTML = detailTeddies.name; 
+  document.getElementById("informationDescription").innerHTML = detailTeddies.description;
+  document.getElementById("informationPrice").innerHTML = "Prix : " + detailTeddies.price / 100 + " €";
 
-    // Récupération des colors pour les boucler sur chaque teddies 
-    detailTeddies.colors.forEach((teddie) => {
-        let choixOption = document.createElement("option");
-        // Mettre les colors dans "choix_option"
-        let selectColor = document.getElementById("choix_option");
-        selectColor.appendChild(choixOption).innerHTML = teddie;
-    });
-
-    // Lié une variable au bouton pour l'évènement
-    let boutonPanier = document.getElementById('ajoutPanier');
+  // Récupération des colors pour les boucler sur chaque teddies 
+  detailTeddies.colors.forEach((teddie) => {
+    let choixOption = document.createElement("option");
+    // Mettre les colors dans "choix_option"
+    let selectColor = document.getElementById("choix_option");
+    selectColor.appendChild(choixOption).innerHTML = teddie;
+  });
     
-    // On récupère les données de la page produit
-    let productPage = detailTeddies;
-    let productPageJson = JSON.stringify(productPage);
-    console.log(productPageJson)
 
-    // Voir si il y a des produits dans le panier, si oui le parser sinon créer un tableau vide
-    const initPanier = () => {
-        let panier = localStorage.getItem("panier");
-        if(panier != null) {
-            return JSON.parse(panier); 
-        }else {
-            return[];
-        }
-    }
+////////////// PANIER STORAGE ///////////////
 
-    // Sauvegarde du panier
-    const savePanier = (panier) => {
-        localStorage.setItem("panier", productPageJson);
-    }
+  // Voir si il y a des produits dans le panier, si oui le parser sinon créer un tableau vide
+  if(localStorage.getItem("panierStorage")){
+    console.log("le panier existe dans le localStorage");
+  }else{
+    console.log("Le panier n'existe pas, le créer et l'envoyer dans le localStorage");
+    // Le panier est un tableau de produits
+    let panierInit = [];
+    localStorage.setItem("panierStorage", JSON.stringify(panierInit));
+  };
 
-    // Avec l'évènement click on envoie les données dans le localStorage + une alerte est créée
-    boutonPanier.addEventListener('click', function () {
-        
-        // Envoie des données dans le storage via le panier
-        let panierStorage = initPanier();
-        panierStorage.push(productPageJson);
-        savePanier(panier);
-        
-        // Envoie de l'alert
-        alert('Votre teddie à bien été ajouté au panier');
-    });
+  // Parser le panier une fois créer
+  let panierStorage = JSON.parse(localStorage.getItem("panierStorage"));
+
+  // Identifier le bouton afin de créer l'évènement clic
+  let boutonPanier = document.getElementById("ajoutPanier");
+  
+  // Récupérer les données du produit
+  let produit = detailTeddies;
+  
+  // Au clic mettre le produit dans le panier
+  boutonPanier.addEventListener("click", function() {
+
+    // Ajout du produit dans le panier + alert
+    panierStorage.push(produit);
+    localStorage.setItem("panierStorage", JSON.stringify(panierStorage));
+
+    // Création de l'alert
+    alert("Vous avez ajouté ce produit dans votre panier")
+  });
 }
+
