@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Votre Panier</title>
   <meta name="description" content="Consulter votre panier de vos meilleurs Ours fait main.">
-  <link rel="stylesheet" href="SCSS/main.css" />
+  <link rel="stylesheet" href="SCSS/main.css"/>
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
 </head>
 <body>
@@ -55,7 +55,7 @@
         <h2>Je passe ma commande</h2>
       </div>
       <div id="formulaire_infos">
-        <form method="post" name="formContact">
+        <form method="post">
           <div class="form-group">
             <label for="nom"><em>Nom de famille</em></label>
             <input id="formNom" type="text" class="form-control" required placeholder="Votre nom de famille"/>
@@ -77,7 +77,7 @@
             <input id="formVille" type="text" class="form-control" required placeholder="Ex: Lyon"/>
           </div>
           <div class="text-center mt-5">
-            <button type="submit" class="btn btn-success col-md-3">Commander</button>
+            <button id="buttonForm" type="submit" class="btn btn-success col-md-3">Commander</button>
           </div>
         </form>
       </div>
@@ -97,8 +97,9 @@
   <!-- SCRIPT APPLICATION -->
   <script src="./JS/panier.js"></script>
   <script>tableauPanier();</script>
+  <script>verifData();</script>
 
-  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <!-- jQuery, Popper.js, Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>

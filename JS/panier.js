@@ -84,7 +84,7 @@ tableauPanier = () => {
 clearPanier = () =>{
   //vide le localstorage
   localStorage.clear();
-  console.log("Administration : localStorage vidé");
+  console.log("localStorage vidé");
   window.location.reload();
 };  
 
@@ -95,17 +95,80 @@ clearPanier = () =>{
 verifData = () => {
 
   // Utilisation de regex
-  let verifString = /[a-zA-Z]/;
   let verifNumber = /[0-9]/;
   let verifEmail = /^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2-10}$ , "g" /;
   let verifSpecialCharacter = /[§!@#$%^&*(),.?":{}|<>]/;
+  let verifMessage = "";
 
   // Récupération des inputs
   let formNom = document.getElementById("formNom").value;
   let formPrenom = document.getElementById("formPrenom").value;
-  let formMail = document.getElementById("formMail").value;
+  let formEmail = document.getElementById("formEmail").value;
   let formAdresse = document.getElementById("formAdresse").value;
   let formVille = document.getElementById("formVille").value;
 
-  
-} 
+  // Vérification du nom
+  if(verifNumber.test(formNom) == true || verifSpecialCharacter.test(formNom) == true || formNom == ""){
+    verifMessage = "Corriger votre nom, une erreur semble être commise";
+  }else{
+    console.log("Le nom est correct");
+  };
+
+  // Vérification du prénom
+  if(verifNumber.test(formPrenom) == true || verifSpecialCharacter.test(formPrenom) == true || formPrenom == ""){
+    verifMessage = verifMessage + "\n" + "Corriger votre prénom, une erreur semble être commise";
+  }else{
+    console.log("Le prénom est correct");
+  };
+
+  // Vérification de l'email
+  if(verifEmail.test(formEmail) == false){
+    verifMessage = verifMessage + "\n" + "Corriger votre email, une erreur semble être commise";
+  }else{
+    console.log("L'email est correct");
+  };
+
+  // Vérification de l'adresse
+  if(verifSpecialCharacter.test(formAdresse) == true || formAdresse == ""){
+    verifMessage = verifMessage + "\n" + "Corriger votre adresse, une erreur semble être commise";
+  }else{
+    console.log("L'adresse est correct");
+  };
+
+  // Vérification de la ville
+  if(verifNumber.test(formVille) == true && verifSpecialCharacter.test(formVille) == true || formVille == ""){
+    verifMessage = verifMessage + "\n" + "Corriger votre ville, une erreur semble être commise");
+  }else{
+    console.log("La ville est correct");
+  };
+
+  // Si il y a une erreur sur un input la corriger, sinon construire l'objet contact
+  if(verifMessage != ""){
+    alert("Veuillez corriger les informations incorrects :" + "\n" +  verifMessage);
+  }else {
+    console.log("Le formulaire est bien remplis !");
+    contact = {
+      nom : formNom,
+      prenom : formPrenom, 
+      email : formEmail
+      adresse : formAdresse,
+      ville : formVille,
+    };
+    return contact;
+  };
+};
+
+// Vérification de l'état du panier
+verifPanier = () => {
+  let etatPanier = JSON.parse(localStorage.getItem("panierStorage"));
+  // Si le panier est vide ou null
+  if  (etatPanier.length < 1 || etatPanier == null) {
+    alert("Votre panier est vide");
+    return false;
+  } else {
+    console.log("Le panier contient des articles");
+    return true;
+  }
+};
+
+
