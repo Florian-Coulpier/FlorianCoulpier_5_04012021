@@ -224,7 +224,6 @@ main {
   }
 
   #formulaire_infos {
-    
 
     #paiement {
       text-align: center;
@@ -241,6 +240,32 @@ main {
     button {
       align-items: center;
     }
+  }
+}
+
+
+////////////////////////////////////////////////// CONFIRMATION.HTML //////////////////////////////////////////////////////
+
+#confirmation {
+
+  #firstName {
+    color: red;
+    font-family: "East";
+    font-size: 35px;
+  }
+
+  #lastName {
+    color: red;
+    font-family: "East";
+    font-size: 35px;
+  }
+
+  #orderId {
+    color: red;
+  }
+
+  #confirmTotalPrice {
+    color: royalblue;
   }
 }
 

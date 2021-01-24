@@ -1,10 +1,13 @@
 /////////////////////////////////////////////////////////// PANIER.HTML ///////////////////////////////////////////////////////////////////
+// Objet à envoyer à l'api
+let contact;
+let products = [];
 
 // Identification emplacement panier dans le html
 let panierListe = document.getElementById("panier");
 panierStorage = JSON.parse(localStorage.getItem("panierStorage"));
 
-tableauPanier = () => {
+const panierTableau = () => {
   // Si il y a un produit dans le panier remove "panierVide" et créer le tableau
   if(JSON.parse(localStorage.getItem("panierStorage")).length > 0){
 
@@ -70,7 +73,7 @@ tableauPanier = () => {
     let totalPrix = 0;
 
     // Pour tout les detailTeddies leur prix s'additionnent
-    JSON.parse(localStorage.getItem("panierStorage")).forEach((detailTeddies)=>{
+    JSON.parse(localStorage.getItem("panierStorage")).forEach((detailTeddies) => {
       totalPrix += detailTeddies.price / 100;
     });
 
@@ -80,9 +83,9 @@ tableauPanier = () => {
   };
 };
 
-//Supprimer un produit du panier
-clearPanier = () =>{
-  //vide le localstorage
+// Supprimer un produit du panier
+const clearPanier = () => {
+  // vide le localstorage
   localStorage.clear();
   console.log("localStorage vidé");
   window.location.reload();
@@ -92,11 +95,11 @@ clearPanier = () =>{
 ////////////////////// Validation du formulaire ///////////////////////
 
 // Véricfication des données
-verifData = () => {
+const verifData = () => {
 
   // Utilisation de regex
   let verifNumber = /[0-9]/;
-  let verifEmail = /^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2-10}$ , "g" /;
+  let verifEmail = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/y;
   let verifSpecialCharacter = /[§!@#$%^&*(),.?":{}|<>]/;
   let verifMessage = "";
 
@@ -137,7 +140,7 @@ verifData = () => {
 
   // Vérification de la ville
   if(verifNumber.test(formVille) == true && verifSpecialCharacter.test(formVille) == true || formVille == ""){
-    verifMessage = verifMessage + "\n" + "Corriger votre ville, une erreur semble être commise");
+    verifMessage = verifMessage + "\n" + "Corriger votre ville, une erreur semble être commise";
   }else{
     console.log("La ville est correct");
   };
@@ -146,20 +149,19 @@ verifData = () => {
   if(verifMessage != ""){
     alert("Veuillez corriger les informations incorrects :" + "\n" +  verifMessage);
   }else {
-    console.log("Le formulaire est bien remplis !");
     contact = {
-      nom : formNom,
-      prenom : formPrenom, 
-      email : formEmail
-      adresse : formAdresse,
-      ville : formVille,
+      lastName: formNom,
+      firstName: formPrenom,
+      address: formAdresse,
+      city: formVille,
+      email: formEmail,
     };
     return contact;
-  };
+  }
 };
 
 // Vérification de l'état du panier
-verifPanier = () => {
+const verifPanier = () => {
   let etatPanier = JSON.parse(localStorage.getItem("panierStorage"));
   // Si le panier est vide ou null
   if  (etatPanier.length < 1 || etatPanier == null) {
@@ -172,3 +174,62 @@ verifPanier = () => {
 };
 
 
+////////////////////////// Envoie vers l'api ///////////////////////////
+
+// URL de l'api pour la requête POST
+let url = "http://localhost:3000/api/teddies/order";
+
+// Création de la requête POST
+const envoiForm = (envoiCommande, url) => {
+  return new Promise((resolve) => {
+    let request = new XMLHttpRequest();
+    request.onload = function () {
+      if (this.readyState == XMLHttpRequest.DONE && this.status == 201) {
+        sessionStorage.setItem("order", this.responseText);
+        window.location = "./confirmation.html";
+        resolve(JSON.parse(this.responseText));
+        console.log(envoiCommande);
+      } else {
+      }
+    };
+    request.open("POST", url);
+    request.setRequestHeader("Content-Type", "application/json");
+    request.send(envoiCommande);
+    console.log(envoiCommande);
+  });
+};
+
+confirmCommande = () => {
+  let commander = document.getElementById("buttonCommander");
+  commander.addEventListener("click", (event) => {
+    event.preventDefault()
+
+    // Implémentation du tableau products envoyé à l'API
+    if (verifPanier() == true && verifData() != null) {
+      console.log("les infos sont OK !");
+      
+      panierStorage.forEach((produit) => {
+        products.push(produit._id);
+      });
+      console.log(products.price);
+
+      // Création de l'objet à envoyer
+      let objApi = {
+        contact,
+        products,
+      };
+
+      // Transformer l'objet en chaine de caractère et l'envoyer
+      let envoiCommande = JSON.stringify(objApi);
+      envoiForm(envoiCommande, url);
+      console.log(objApi);
+
+      //Une fois la commande effectuée retour à l'état initial des tableaux/objet/localStorage
+      contact = {};
+      products = [];
+      localStorage.clear();
+    } else {
+      console.log("ERROR");
+    }
+  });
+};

@@ -3,9 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Orinours vos peluches fait main</title>
-  <meta name="description" content="Vos meilleurs peluches d'ours ! Fabrication française, bénéficiez de la meilleure qualité fait main.">
-  <link rel="stylesheet" href="SCSS/main.css" />
+  <title>Confirmation de votre commande</title>
+  <meta name="description" content="Consulter votre panier de vos meilleurs Ours fait main.">
+  <link rel="stylesheet" href="SCSS/main.css"/>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
 </head>
 <body>
   <header>
@@ -20,10 +21,10 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav">
             <li class="nav-item mr-3">
-              <a class="nav-link active" aria-current="page" href="index.html">Accueil</a>
+              <a class="nav-link" aria-current="page" href="index.html">Accueil</a>
             </li>
             <li class="nav-item mr-3">
-              <a class="nav-link" href="panier.html">Panier 
+              <a class="nav-link active" href="#">Panier 
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart3" viewBox="0 0 16 16">
                 <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
                 </svg>
@@ -37,15 +38,23 @@
 
   <main>
     <div id="hero" class="container-fluid">
-      <h1><em>Bienvenue chez Orinours !</em></h1>
+      <h1><em>Confirmation de votre commande</em></h1>
     </div>
-    
-    <section class="container">
-      <div id="listeProduit" class="row">
-      </div>
+
+    <section id="confirmation" class="container mt-5">
+      <p>Bonjour <span id="firstName"></span> <span id="lastName"></span>,<br><br>
+        Nous vous remercions pour votre achat,<br>
+        Votre commande porte le n° : <span id="orderId"></span>,<br><br>
+        Veuillez conserver ce numéro pour toutes demandes relatifs à votre commande.<br><br>
+        Le prix total de votre commande est de : <br>
+        <div id="confirmTotalPrice"></div><br><br>
+        À bientôt,<br>
+        L'équipe Orinours.<br><br>
+      </p>
+      <a class="btn btn-info" href="index.html">Retourner à l'accueil</a>
     </section>
   </main>
-
+  
   <footer>
     <div class="container-fluid">
       <ul class="list-unstyled">
@@ -57,8 +66,8 @@
   </footer>
 
   <!-- SCRIPT APPLICATION -->
-  <script src="./JS/index.js"></script>
-  <script>teddies();</script>
+  <script src="./JS/confirmation.js"></script>
+  <script>resultConfirm();</script>
 
 </body>
 </html>

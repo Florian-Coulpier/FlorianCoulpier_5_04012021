@@ -11000,6 +11000,26 @@ main #listeProduit .contenant-card .card-description a:hover {
           align-items: center;
 }
 
+#confirmation #firstName {
+  color: red;
+  font-family: "East";
+  font-size: 35px;
+}
+
+#confirmation #lastName {
+  color: red;
+  font-family: "East";
+  font-size: 35px;
+}
+
+#confirmation #orderId {
+  color: red;
+}
+
+#confirmation #confirmTotalPrice {
+  color: royalblue;
+}
+
 /* FOOTER */
 footer {
   background-color: #f8f9f9;
